@@ -1,8 +1,20 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://<rashed>:<65SN!S36Owko>@cluster0.s2v3h.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+const mongoose = require('mongoose');
+
+// Fix deprecation warning
+mongoose.set('strictQuery', false);
+
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (err) {
+        console.error(`Error: ${err.message}`);
+        console.log('MongoDB connection failed. Running without database...');
+        // Don't exit process, allow server to run without DB
+    }
+};
+
+module.exports = connectDB;
