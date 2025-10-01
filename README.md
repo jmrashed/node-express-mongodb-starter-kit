@@ -1,4 +1,6 @@
-<img src="https://img.shields.io/badge/Node.js-Express-MongoDB-green" alt="Node.js Express MongoDB" />
+<div align="center">
+  <img src="./assets/logo.svg" alt="Node Express MongoDB Starter Kit" width="400" />
+</div>
 
 # Node Express MongoDB Starter Kit
 
